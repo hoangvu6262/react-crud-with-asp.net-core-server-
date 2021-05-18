@@ -129,3 +129,8 @@ C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\zh-Hans\Microsof
 C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
+C:\Users\PC\source\repos\Mobile_App\Mobile_App\obj\Debug\net5.0\Mobile_App.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll

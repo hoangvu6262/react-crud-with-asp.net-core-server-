@@ -31,6 +31,17 @@ namespace Mobile_App
 
             services.AddDbContext<MobileShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MobileDbContext")));
             services.AddCors();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1",
+                    new Microsoft.OpenApi.Models.OpenApiInfo
+                    {
+                        Title = "Swagger Mobile shop Api",
+                        Description = "Mobile Shop API for showing Swagger",
+                        Version = "V1"
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +64,13 @@ namespace Mobile_App
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Mobile shop Api");
             });
         }
     }
