@@ -56,6 +56,12 @@ namespace Mobile_App
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                // For mobile apps, allow http traffic.
+                app.UseHttpsRedirection();
+            }
+
 
             app.UseRouting();
 
