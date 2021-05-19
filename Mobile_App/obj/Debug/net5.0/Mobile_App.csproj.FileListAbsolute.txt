@@ -134,3 +134,4 @@ C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\Microsoft.OpenAp
 C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\PC\source\repos\Mobile_App\Mobile_App\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
