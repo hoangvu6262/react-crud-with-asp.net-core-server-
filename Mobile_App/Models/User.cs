@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Mobile_App.Models
 {
-    public class Users
+    public class User
     {
         [Key]
-        public int id { get; set; }
+        public int Usersid { get; set; }
 
         [Column(TypeName ="nvarchar(100)")]
         public string taiKhoan { get; set; }

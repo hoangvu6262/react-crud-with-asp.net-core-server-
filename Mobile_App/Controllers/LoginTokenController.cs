@@ -28,7 +28,7 @@ namespace Mobile_App.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(Users _userData)
+        public async Task<IActionResult> Post(User _userData)
         {
 
             if (_userData != null && _userData.taiKhoan != null && _userData.matKhau != null)
@@ -42,7 +42,7 @@ namespace Mobile_App.Controllers
                     new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                    new Claim("id", user.id.ToString()),
+                    new Claim("id", user.Usersid.ToString()),
                     new Claim("hoTen", user.hoTen),
                     new Claim("taiKhoan", user.taiKhoan),
                     new Claim("email", user.email),
@@ -59,7 +59,7 @@ namespace Mobile_App.Controllers
                     var accessToken = Ok(new JwtSecurityTokenHandler().WriteToken(tokenString));
 
                     var response = Ok(new { 
-                        id = user.id, 
+                        id = user.Usersid, 
                         taiKhoan = user.taiKhoan,
                         matKhau = user.matKhau,
                         hoTen = user.hoTen, 
@@ -81,7 +81,7 @@ namespace Mobile_App.Controllers
             }
         }
 
-        private async Task<Users> GetUser(string taiKhoan, string matKhau)
+        private async Task<User> GetUser(string taiKhoan, string matKhau)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.taiKhoan == taiKhoan && u.matKhau == matKhau);
         }

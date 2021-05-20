@@ -10,8 +10,8 @@ using Mobile_App.Models;
 namespace Mobile_App.Migrations
 {
     [DbContext(typeof(MobileShopDbContext))]
-    [Migration("20210520044554_updateProduct")]
-    partial class updateProduct
+    [Migration("20210520092719_IntialCreate")]
+    partial class IntialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,41 +21,7 @@ namespace Mobile_App.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Mobile_App.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("OrderDetailID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OrdersOrderID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("ProductPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("ProductsProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("OrderDetailID");
-
-                    b.HasIndex("OrdersOrderID");
-
-                    b.HasIndex("ProductsProductID");
-
-                    b.ToTable("OrderDetails");
-                });
-
-            modelBuilder.Entity("Mobile_App.Models.Orders", b =>
+            modelBuilder.Entity("Mobile_App.Models.Order", b =>
                 {
                     b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd()
@@ -71,17 +37,80 @@ namespace Mobile_App.Migrations
                     b.Property<int>("UserID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Usersid")
-                        .HasColumnType("int");
-
                     b.Property<string>("status")
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("OrderID");
 
-                    b.HasIndex("Usersid");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Mobile_App.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderDetailID");
+
+                    b.HasIndex("OrderID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("OrderDetails");
+                });
+
+            modelBuilder.Entity("Mobile_App.Models.Product", b =>
+                {
+                    b.Property<int>("ProductID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ModelName")
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("ProductModelID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantily")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rom")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
+
+                    b.HasKey("ProductID");
+
+                    b.HasIndex("ProductModelID");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Mobile_App.Models.ProductModel", b =>
@@ -127,47 +156,9 @@ namespace Mobile_App.Migrations
                     b.ToTable("ProductModels");
                 });
 
-            modelBuilder.Entity("Mobile_App.Models.Products", b =>
+            modelBuilder.Entity("Mobile_App.Models.User", b =>
                 {
-                    b.Property<int>("ProductID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Image")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ModelName")
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ProductModelID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantily")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rom")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
-
-                    b.HasKey("ProductID");
-
-                    b.HasIndex("ProductModelID");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("Mobile_App.Models.Users", b =>
-                {
-                    b.Property<int>("id")
+                    b.Property<int>("Usersid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -190,34 +181,40 @@ namespace Mobile_App.Migrations
                     b.Property<string>("taiKhoan")
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("id");
+                    b.HasKey("Usersid");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Mobile_App.Models.OrderDetail", b =>
+            modelBuilder.Entity("Mobile_App.Models.Order", b =>
                 {
-                    b.HasOne("Mobile_App.Models.Orders", null)
-                        .WithMany("OderDetails")
-                        .HasForeignKey("OrdersOrderID");
-
-                    b.HasOne("Mobile_App.Models.Products", "Products")
+                    b.HasOne("Mobile_App.Models.User", "Users")
                         .WithMany()
-                        .HasForeignKey("ProductsProductID");
-
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Mobile_App.Models.Orders", b =>
-                {
-                    b.HasOne("Mobile_App.Models.Users", "Users")
-                        .WithMany()
-                        .HasForeignKey("Usersid");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Users");
                 });
 
-            modelBuilder.Entity("Mobile_App.Models.Products", b =>
+            modelBuilder.Entity("Mobile_App.Models.OrderDetail", b =>
+                {
+                    b.HasOne("Mobile_App.Models.Order", null)
+                        .WithMany("OderDetails")
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mobile_App.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Mobile_App.Models.Product", b =>
                 {
                     b.HasOne("Mobile_App.Models.ProductModel", "ProductModel")
                         .WithMany()
@@ -228,7 +225,7 @@ namespace Mobile_App.Migrations
                     b.Navigation("ProductModel");
                 });
 
-            modelBuilder.Entity("Mobile_App.Models.Orders", b =>
+            modelBuilder.Entity("Mobile_App.Models.Order", b =>
                 {
                     b.Navigation("OderDetails");
                 });

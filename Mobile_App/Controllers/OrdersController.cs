@@ -22,14 +22,14 @@ namespace Mobile_App.Controllers
 
         // GET: api/Orders
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Orders>>> GetOrders()
+        public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
             return await _context.Orders.ToListAsync();
         }
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Orders>> GetOrders(int id)
+        public async Task<ActionResult<Order>> GetOrders(int id)
         {
             var orders = await _context.Orders.FindAsync(id);
 
@@ -44,7 +44,7 @@ namespace Mobile_App.Controllers
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrders(int id, Orders orders)
+        public async Task<IActionResult> PutOrders(int id, Order orders)
         {
             if (id != orders.OrderID)
             {
@@ -75,7 +75,7 @@ namespace Mobile_App.Controllers
         // POST: api/Orders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Orders>> PostOrders(Orders orders)
+        public async Task<ActionResult<Order>> PostOrders(Order orders)
         {
             _context.Orders.Add(orders);
             await _context.SaveChangesAsync();

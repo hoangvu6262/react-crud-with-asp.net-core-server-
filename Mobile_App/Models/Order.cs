@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Mobile_App.Models
 {
-    public class Orders
+    public class Order
     {
         [Key]
         public int OrderID { get; set; }
 
         public int UserID { get; set; }
-        public Users Users { get; set; }
+        public User Users { get; set; }
 
         [Column(TypeName = "Date")]
         public DateTime Date { get; set; }

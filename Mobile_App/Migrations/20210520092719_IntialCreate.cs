@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mobile_App.Migrations
 {
-    public partial class intialcreate : Migration
+    public partial class IntialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,11 @@ namespace Mobile_App.Migrations
                 {
                     ProductModelID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ModelName = table.Column<string>(type: "nvarchar(1000)", nullable: true),
-                    Demensions = table.Column<string>(type: "nvarchar(1000)", nullable: true),
+                    ModelName = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    Demensions = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     Ram = table.Column<int>(type: "int", nullable: false),
-                    Display = table.Column<string>(type: "nvarchar(1000)", nullable: true),
-                    Camera = table.Column<string>(type: "nvarchar(1000)", nullable: true),
+                    Display = table.Column<string>(type: "nvarchar(1000)", nullable: false),
+                    Camera = table.Column<string>(type: "nvarchar(1000)", nullable: false),
                     Battery = table.Column<int>(type: "int", nullable: false),
                     Chip = table.Column<string>(type: "nvarchar(1000)", nullable: true),
                     Describe = table.Column<string>(type: "text", nullable: true),
@@ -32,7 +32,7 @@ namespace Mobile_App.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Usersid = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     taiKhoan = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     hoTen = table.Column<string>(type: "nvarchar(100)", nullable: true),
@@ -43,7 +43,7 @@ namespace Mobile_App.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.id);
+                    table.PrimaryKey("PK_Users", x => x.Usersid);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,11 +87,11 @@ namespace Mobile_App.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.OrderID);
                     table.ForeignKey(
-                        name: "FK_Orders_Users_Usersid",
+                        name: "FK_Orders_Users_UserID",
                         column: x => x.UserID,
                         principalTable: "Users",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Usersid",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,38 +103,37 @@ namespace Mobile_App.Migrations
                     OrderID = table.Column<int>(type: "int", nullable: false),
                     ProductID = table.Column<int>(type: "int", nullable: false),
                     ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                   
+                    Quantity = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailID);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Orders_OrdersOrderID",
+                        name: "FK_OrderDetails_Orders_OrderID",
                         column: x => x.OrderID,
                         principalTable: "Orders",
                         principalColumn: "OrderID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_OrderDetails_Products_ProductsProductID",
+                        name: "FK_OrderDetails_Products_ProductID",
                         column: x => x.ProductID,
                         principalTable: "Products",
                         principalColumn: "ProductID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_OrdersOrderID",
+                name: "IX_OrderDetails_OrderID",
                 table: "OrderDetails",
                 column: "OrderID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_OrderDetails_ProductsProductID",
+                name: "IX_OrderDetails_ProductID",
                 table: "OrderDetails",
                 column: "ProductID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_Usersid",
+                name: "IX_Orders_UserID",
                 table: "Orders",
                 column: "UserID");
 

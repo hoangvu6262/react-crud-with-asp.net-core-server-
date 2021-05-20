@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Mobile_App.Models
 {
-    public class Products
+    public class Product
     {
         [Key]
         public int ProductID { get; set; }

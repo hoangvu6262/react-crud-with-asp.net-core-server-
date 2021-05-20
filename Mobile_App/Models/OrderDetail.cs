@@ -14,7 +14,7 @@ namespace Mobile_App.Models
         public int OrderID { get; set; }
 
         public int ProductID { get; set; }
-        public Products Products { get; set; }
+        public Product Product { get; set; }
 
         public decimal ProductPrice { get; set; }
 
