@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mobile_App.Models;
+using Mobile_App.Services.UserServices;
 
 namespace Mobile_App.Controllers
 {
@@ -13,25 +14,25 @@ namespace Mobile_App.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly MobileShopDbContext _context;
+        private readonly IUsersService _repository;
 
-        public UsersController(MobileShopDbContext context)
+        public UsersController(IUsersService repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/Users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        [HttpGet("getalluser")]
+        public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
-            return await _context.Users.ToListAsync();
+            return await _repository.GetAllUser();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUsers(int id)
+        public async Task<ActionResult<User>> GetUserById(int id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var users = await _repository.GetUserById(id);
 
             if (users == null)
             {
@@ -44,15 +45,13 @@ namespace Mobile_App.Controllers
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUsers(int id, User users)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
-            users.Usersid = id;
-
-            _context.Entry(users).State = EntityState.Modified;
+            _repository.PutUser(id, user);
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _repository.SaveChangeAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,33 +71,33 @@ namespace Mobile_App.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<User>> PostUsers(User users)
+        public async Task<ActionResult<User>> AddUser(User user)
         {
-            _context.Users.Add(users);
-            await _context.SaveChangesAsync();
+            _repository.AddUser(user);
+            await _repository.SaveChangeAsync();
 
-            return CreatedAtAction("GetUsers", new { id = users.Usersid }, users);
+            return CreatedAtAction("GetUsers", new { id = user.Usersid }, user);
         }
 
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUsers(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            var users = await _context.Users.FindAsync(id);
+            var users = _repository.FindUserById(id);
             if (users == null)
             {
                 return NotFound();
             }
 
-            _context.Users.Remove(users);
-            await _context.SaveChangesAsync();
+            _repository.DeleteUser(users);
+            await _repository.SaveChangeAsync();
 
             return NoContent();
         }
 
         private bool UsersExists(int id)
         {
-            return _context.Users.Any(e => e.Usersid == id);
+            return _repository.UsersExists(id);
         }
     }
 }

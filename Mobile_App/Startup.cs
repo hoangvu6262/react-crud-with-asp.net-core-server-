@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Mobile_App.Models;
+using Mobile_App.Services.UserServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace Mobile_App
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddScoped<IUsersService, UsersService>();
             services.AddControllers();
 
             services.AddDbContext<MobileShopDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MobileDbContext")));
