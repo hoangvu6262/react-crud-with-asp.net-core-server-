@@ -10,7 +10,7 @@ using Mobile_App.Services.UserServices;
 
 namespace Mobile_App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/UserManagement/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -21,14 +21,14 @@ namespace Mobile_App.Controllers
             _repository = repository;
         }
 
-        // GET: api/Users
+        // GET: api/UserManagement/Users
         [HttpGet("getalluser")]
         public async Task<ActionResult<IEnumerable<User>>> GetAllUsers()
         {
             return await _repository.GetAllUser();
         }
 
-        // GET: api/Users/5
+        // GET: api/UserManagement/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUserById(int id)
         {
@@ -42,7 +42,22 @@ namespace Mobile_App.Controllers
             return users;
         }
 
-        // PUT: api/Users/5
+        //GET: api/UserManagement/Users/TimKiem/1123
+        [HttpGet("TimKiem/{taiKhoan}")]
+        public async Task<ActionResult<User>> FindUser(string taiKhoan)
+        {
+            var users = await _repository.FindUserByAccount(taiKhoan);
+            Console.WriteLine(users);
+
+            if (users == null)
+            {
+                return NotFound();
+            }
+
+            return users;
+        }
+
+        // PUT: api/UserManagement/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
@@ -69,7 +84,7 @@ namespace Mobile_App.Controllers
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST:api/UserManagement/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<User>> AddUser(User user)
@@ -77,10 +92,10 @@ namespace Mobile_App.Controllers
             _repository.AddUser(user);
             await _repository.SaveChangeAsync();
 
-            return CreatedAtAction("GetUsers", new { id = user.Usersid }, user);
+            return CreatedAtAction("GetUserById", new { id = user.Usersid }, user);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/UserManagement/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

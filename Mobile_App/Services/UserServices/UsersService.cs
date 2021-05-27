@@ -29,6 +29,12 @@ namespace Mobile_App.Services.UserServices
             _context.Users.Remove(user);
         }
 
+        //Find User by account
+        public async Task<ActionResult<User>> FindUserByAccount(string account)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.taiKhoan == account);
+        }
+
         //find user by id service
         public User FindUserById(int id)
         {

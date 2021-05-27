@@ -17,6 +17,8 @@ namespace Mobile_App.Services.UserServices
 
         Task<ActionResult<User>> GetUserById(int id);
 
+        Task<ActionResult<User>> FindUserByAccount(string account);
+
         void AddUser(User newUser);
 
         void PutUser(int id, User user);
@@ -24,5 +26,7 @@ namespace Mobile_App.Services.UserServices
         void DeleteUser(User user);
 
         User FindUserById(int id);
+
+
     }
 }

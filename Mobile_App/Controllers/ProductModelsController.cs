@@ -9,7 +9,7 @@ using Mobile_App.Models;
 
 namespace Mobile_App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/ModelManagement/[controller]")]
     [ApiController]
     public class ProductModelsController : ControllerBase
     {

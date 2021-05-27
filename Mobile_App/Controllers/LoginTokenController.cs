@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Mobile_App.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/LoginManagement/[controller]")]
     [ApiController]
     public class LoginTokenController : ControllerBase
     {
