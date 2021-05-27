@@ -47,6 +47,7 @@ namespace Mobile_App.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
+            user.Usersid = id;
             _repository.PutUser(id, user);
 
             try

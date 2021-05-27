@@ -50,8 +50,6 @@ namespace Mobile_App.Services.UserServices
         //update user service
         public void PutUser(int id, User user)
         {
-            user.Usersid = id;
-
             _context.Entry(user).State = EntityState.Modified;
         }
 
