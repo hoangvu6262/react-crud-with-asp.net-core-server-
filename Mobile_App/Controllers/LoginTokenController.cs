@@ -45,6 +45,7 @@ namespace Mobile_App.Controllers
                     new Claim("id", user.Usersid.ToString()),
                     new Claim("hoTen", user.hoTen),
                     new Claim("taiKhoan", user.taiKhoan),
+                    new Claim("matKhau", user.matKhau),
                     new Claim("email", user.email),
                     new Claim("soDt", user.soDt),
                     new Claim("maLoaiNguoiDung", user.maLoaiNguoiDung)
@@ -59,11 +60,11 @@ namespace Mobile_App.Controllers
                     var accessToken = Ok(new JwtSecurityTokenHandler().WriteToken(tokenString));
 
                     var response = Ok(new { 
-                        id = user.Usersid, 
-                        taiKhoan = user.taiKhoan,
-                        matKhau = user.matKhau,
-                        hoTen = user.hoTen, 
-                        soDt = user.soDt,
+                        //id = user.Usersid, 
+                        //taiKhoan = user.taiKhoan,
+                        //matKhau = user.matKhau,
+                        //hoTen = user.hoTen, 
+                        //soDt = user.soDt,
                         maLoaiNguoiDung = user.maLoaiNguoiDung,
                         token = accessToken.Value
                     });
